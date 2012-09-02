@@ -31,6 +31,16 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 def score(dice)
   # You need to write this method
+  total = 0
+  (1..6).each do |die|
+    count = dice.select {|d| d == die}.length
+    mod = die == 1 ? 10 : 1
+    if (die == 1) or (die == 5)
+      total += mod * die * 10 * (count % 3)
+    end
+    total += mod * die * 100 * (count / 3)
+  end
+  total
 end
 
 class AboutScoringProject < EdgeCase::Koan
